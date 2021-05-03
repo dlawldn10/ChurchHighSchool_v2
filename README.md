@@ -13,7 +13,8 @@
 ## 문화교회 고등부 선생님들을 위한 출석체크 화면
 #### '이번주 출석체크 확인'버튼을 통해 QR코드 스캐너 활성화
 #### 스캐너로 학생들 QR코드를 인식하여 해당 주차의 출석 인원 확인
-### <img src = "https://user-images.githubusercontent.com/69448918/116881916-ccee3a80-ac5e-11eb-96af-dce72830ff91.jpg" width="300px"> <img src = "https://user-images.githubusercontent.com/69448918/116881908-c9f34a00-ac5e-11eb-9ca7-ef67d66cfa59.jpg" width="300px">
+### <img src = "https://user-images.githubusercontent.com/69448918/116881916-ccee3a80-ac5e-11eb-96af-dce72830ff91.jpg" width="300px"> 
+<img src = "https://user-images.githubusercontent.com/69448918/116881908-c9f34a00-ac5e-11eb-9ca7-ef67d66cfa59.jpg" width="300px"> <img src =  https://user-images.githubusercontent.com/69448918/116883198-49354d80-ac60-11eb-9bbe-2bd0812f3071.jpg width="300px">
 ---
 ## 문화교회 고등부 학생들을 위한 출석체크 화면
 #### 학생 정보를 담은 QR코드를 생성하여 선생님께 스캔받기
