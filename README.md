@@ -13,6 +13,9 @@
 ## 문화교회 고등부 선생님들을 위한 출석체크 화면
 ### <img src = "https://user-images.githubusercontent.com/69448918/115144036-63c6ce80-a085-11eb-8c88-2736d806f27b.jpg" width="300px"> <img src = "https://user-images.githubusercontent.com/69448918/115144037-64f7fb80-a085-11eb-9a54-7ab19b201c5c.jpg" width="300px">
 ---
+## 문화교회 고등부 학생들을 위한 출석체크 화면
+### <img src = https://user-images.githubusercontent.com/69448918/116881908-c9f34a00-ac5e-11eb-9ca7-ef67d66cfa59.jpg>
+---
 ## 이번주 주보를 손쉽게 확인
 ### 선생님들 화면에서는 주보 업데이트 가능
 ### <img src = "https://user-images.githubusercontent.com/69448918/115144035-61fd0b00-a085-11eb-829f-8d68eb83549f.jpg" width="300px">
