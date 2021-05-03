@@ -106,8 +106,8 @@ class MemoPostFragment : Fragment() {
 
             val values = ContentValues()
             values.put("title", title)
-            values.put("date", YYYYMMDD)
             values.put("text", text)
+            //메모를 월별로 확인하고 싶으므로 작성날짜는 업데이트 하지 않는다.
 
             database.update("myMemo", values, "_id =?", arrayOf(this_primkey))
             Toast.makeText(requireContext(), "업데이트 되었습니다.", Toast.LENGTH_SHORT).show()

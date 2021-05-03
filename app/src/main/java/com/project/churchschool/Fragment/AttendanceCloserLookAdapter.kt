@@ -42,8 +42,6 @@ class AttendanceCloserLookAdapter(val NameList: MutableSet<String>?,
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: StudentsViewHolder, position: Int) {
         var StName = holder.StudentList.findViewById<TextView>(R.id.StName)
-        var O_Bttn = holder.StudentList.findViewById<RadioButton>(R.id.O_bg)
-        var X_Bttn = holder.StudentList.findViewById<RadioButton>(R.id.X_bg)
         Log.d(ContentValues.TAG, selectedAttndndceData.toString())
         var tmp : String? =  NameList?.elementAt(position).toString()
         Log.d(ContentValues.TAG, tmp.toString())

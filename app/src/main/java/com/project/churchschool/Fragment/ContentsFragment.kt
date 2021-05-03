@@ -81,7 +81,7 @@ class ContentsFragment : Fragment() {
     }
 
     fun gotoGallery(){
-        val intent = Intent(requireContext(), GalleryActivity::class.java)
+        val intent = Intent(context, GalleryActivity::class.java)
         //startActivityForResult는 A에서 이동한 B Activity가 종료되면서 다시 A로 데이터를 보내는 방식.
         intent.putExtra("from", "ContentsFragment")
         startActivityForResult(intent, 200)
@@ -97,7 +97,7 @@ class ContentsFragment : Fragment() {
                 } else {
 
                     Toast.makeText(
-                        requireContext(), "프로필 사진을 변경하려면 권한이 필요합니다.\n'설정>앱>문화교회 고등부>권한' 에서 설정해주세요.",
+                        context, "프로필 사진을 변경하려면 권한이 필요합니다.\n'설정>앱>문화교회 고등부>권한' 에서 설정해주세요.",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -146,12 +146,12 @@ class ContentsFragment : Fragment() {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Toast.makeText(
-                    requireContext(), "주보가 업데이트 되었습니다",
+                    context, "주보가 업데이트 되었습니다",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
                 Toast.makeText(
-                    requireContext(), "업로드 실패",
+                    context, "업로드 실패",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -168,7 +168,7 @@ class ContentsFragment : Fragment() {
 
         }.addOnFailureListener {
             Toast.makeText(
-                requireContext(), "주보 업데이트가 필요합니다.",
+                context, "주보 업데이트가 필요합니다.",
                 Toast.LENGTH_SHORT
             ).show()
         }

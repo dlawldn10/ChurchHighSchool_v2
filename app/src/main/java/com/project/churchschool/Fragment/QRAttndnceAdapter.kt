@@ -36,7 +36,6 @@ class QRAttndnceAdapter(private val AttndnceList: ArrayList<QR_AttendanceData>,
     override fun onBindViewHolder(holder: StudentsViewHolder, position: Int) {
         var date = holder.DatesList.findViewById<TextView>(R.id.Tchr_Attndnce_date)
         var present = holder.DatesList.findViewById<TextView>(R.id.tchr_Attndnce_present)
-        var absent = holder.DatesList.findViewById<TextView>(R.id.tchr_Attndnce_absent)
 
         var p : Int = 0
         var a : Int = 0
@@ -55,7 +54,6 @@ class QRAttndnceAdapter(private val AttndnceList: ArrayList<QR_AttendanceData>,
         }
         date.text = AttndnceList[position].date
         present.text = "출석" + p.toString() + "명"
-        absent.text = "/결석" + a.toString() + "명"
 
     }
 

@@ -39,7 +39,7 @@ class QRcodeScannerActivity : BasicActivity() {
     fun startScan(){
         qrScan = IntentIntegrator(this);
         qrScan!!.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
-        qrScan!!.setPrompt("Sample Text!");
+        qrScan!!.setPrompt("QR코드를 비춰 주세요");
         qrScan!!.initiateScan();
     }
 

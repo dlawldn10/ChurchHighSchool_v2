@@ -87,7 +87,7 @@ class QRcodeAttendanceFragment : Fragment() {
                     for(i in 0..dateList.size-1){
                         FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i], dateList[i]))
                     }
-                    viewManager = LinearLayoutManager(requireContext())
+                    viewManager = LinearLayoutManager(context)
                     viewAdapter = QRAttndnceAdapter(FinalattndnceInfo, activity, this)
 
 
@@ -105,6 +105,7 @@ class QRcodeAttendanceFragment : Fragment() {
 
         rootView.Tchr_Attndnce_right_arrow.setOnClickListener {     //다음월 데이터 출력하기
             attndnceInfo.clear()
+            FinalattndnceInfo.clear()
             thisMonth_int = thisMonth_int?.plus(1)
             if (thisMonth_int in 1..9) {
                 thisMonth_string = "0" + thisMonth_int.toString()
@@ -154,6 +155,7 @@ class QRcodeAttendanceFragment : Fragment() {
 
         rootView.Tchr_Attndnce_left_arrow.setOnClickListener {
             attndnceInfo.clear()
+            FinalattndnceInfo.clear()
             thisMonth_int = thisMonth_int?.minus(1)
             if (thisMonth_int in 1..9) {
                 thisMonth_string = "0" + thisMonth_int.toString()

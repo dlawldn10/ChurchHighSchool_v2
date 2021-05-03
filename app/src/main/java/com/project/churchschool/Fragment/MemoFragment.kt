@@ -59,7 +59,7 @@ class MemoFragment : Fragment() {
         database = dbHelper.writableDatabase
         setUI(rootView, thisMonth_int)
 
-        val query = "SELECT * FROM myMemo WHERE date LIKE '$thisYear/$thisMonth_string%';"
+        val query = "SELECT * FROM myMemo WHERE date LIKE '$thisYear-$thisMonth_string%';"
         try {
             var c = database.rawQuery(query,null)
             if(c !=null) {
@@ -104,7 +104,7 @@ class MemoFragment : Fragment() {
             }
             setUI(rootView, thisMonth_int)
             rootView.findViewById<TextView>(R.id.Month_TextView_memo).text = thisMonth_string + "월"
-            val query = "SELECT * FROM myMemo WHERE date LIKE '$thisYear/$thisMonth_string%';"
+            val query = "SELECT * FROM myMemo WHERE date LIKE '$thisYear-$thisMonth_string%';"
             try {
                 var c = database.rawQuery(query,null)
                 if(c !=null) {
@@ -146,7 +146,7 @@ class MemoFragment : Fragment() {
             }
             setUI(rootView, thisMonth_int)
             rootView.findViewById<TextView>(R.id.Month_TextView_memo).text = thisMonth_string + "월"
-            val query = "SELECT * FROM myMemo WHERE date LIKE '$thisYear/$thisMonth_string%';"
+            val query = "SELECT * FROM myMemo WHERE date LIKE '$thisYear-$thisMonth_string%';"
             try {
                 var c = database.rawQuery(query,null)
                 if(c !=null) {

@@ -8,8 +8,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.churchschool.DataClass.PrayerData
 import com.project.churchschool.R
+import kotlin.coroutines.coroutineContext
 
-class PrayerListFragmentAdapter(private val PrayerList: ArrayList<PrayerData>?) :
+class PrayerListFragmentAdapter(private val PrayerList: ArrayList<PrayerData?>?) :
     RecyclerView.Adapter<PrayerListFragmentAdapter.PrayersViewHolder>() {
 
     class PrayersViewHolder(val PrayList: CardView) : RecyclerView.ViewHolder(PrayList)
@@ -44,6 +45,7 @@ class PrayerListFragmentAdapter(private val PrayerList: ArrayList<PrayerData>?) 
     fun addChat(prayerData: PrayerData?){
         PrayerList?.add(prayerData!!)
         notifyItemInserted(getItemCount()-1)    //데이터 갱신.
-        Log.e("결과 addChat", PrayerList.toString())
+
+//        Log.e("결과 addChat", PrayerList.toString())
     }
 }

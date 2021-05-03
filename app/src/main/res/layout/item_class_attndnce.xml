@@ -13,36 +13,29 @@
         android:padding="20dp"
         android:weightSum="3">
 
-        <TextView
-            android:id="@+id/Tchr_Attndnce_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1.3"
-            android:text="2021/01/03"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tchr_Attndnce_present"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="출석n명"
-            android:textAlignment="textEnd"
-            android:textColor="@color/mainBlue"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tchr_Attndnce_present"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:text="출석n명"
+                android:textAlignment="textEnd"
+                android:textColor="@color/mainBlue"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tchr_Attndnce_absent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="/결석n명"
-            android:textAlignment="textStart"
-            android:textColor="@color/gray"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/Tchr_Attndnce_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:text="2021/01/03"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+        </FrameLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
