@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--최상위 레이아웃. DrawerLayout-->
+<!--main_layout.xml과 Drawer영역 모두 포함하여 보여줄 xml-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!--메인 레이아웃-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/Container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/BottomNavi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                app:itemIconTint="@color/colorBlack"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/bottom_menu"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="759dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--자식 레이아웃. Navigation Drawer-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/main_navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        app:headerLayout="@layout/main_drawer_header"
+        app:menu="@menu/main_drawer_navigation">
+
+    </com.google.android.material.navigation.NavigationView>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

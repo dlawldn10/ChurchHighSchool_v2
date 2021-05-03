@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 툴바를 포함한 메인 메뉴의 view를 보여줄 xml-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_layout"
+    android:layout_width="match_parent"
+    android:layout_height = "match_parent"
+    android:orientation="vertical">
+
+    <!-- 툴바 -->
+    <include layout="@layout/main_toolbar"/>
+
+
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".Fragment.MyclassAttendanceFragment">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/my_memo" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/Year_TextView_memo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2021"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:id="@+id/MemoList_left_arrow"
+            android:layout_width="10dp"
+            android:layout_height="15dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/arrow_left" />
+
+        <TextView
+            android:id="@+id/Month_TextView_memo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/MemoList_right_arrow"
+            android:layout_width="10dp"
+            android:layout_height="15dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/arrow_right" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/memo_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addMemo_Bttn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/mainBlue"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_add_24"
+            app:useCompatPadding="true" />
+    </RelativeLayout>
+</LinearLayout>

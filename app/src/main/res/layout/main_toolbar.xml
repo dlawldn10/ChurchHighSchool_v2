@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 툴바 디자인 xml-->
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/colorWhite"
+    android:minHeight="?attr/actionBarSize"
+    app:navigationIcon="@drawable/ic_baseline_menu_24"
+    app:titleTextAppearance="@style/TextAppearance.AppCompat.Small"
+    app:titleTextColor="@color/colorBlack">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="72dp"
+        app:srcCompat="@drawable/main_title">
+
+    </ImageView>
+</androidx.appcompat.widget.Toolbar>

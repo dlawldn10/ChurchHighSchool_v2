@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id = "@+id/Home"
+        android:icon = "@drawable/home_icon"
+        android:title = "홈"
+        />
+    <item android:id = "@+id/AttendanceCheck"
+        android:icon = "@drawable/ic_baseline_check_24"
+        android:title = "출석체크"
+        />
+    <item android:id = "@+id/Contents"
+        android:icon = "@drawable/content_icon"
+        android:title = "주보"
+        />
+    <item android:id = "@+id/Memo"
+        android:icon = "@drawable/memo_icon"
+        android:title = "메모"
+        />
+    <item android:id = "@+id/PrayerList"
+        android:icon = "@drawable/ic_baseline_emoji_flags_24"
+        android:title = "기도제목"
+        />
+
+</menu>

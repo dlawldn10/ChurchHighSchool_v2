@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 메뉴의 네비게이션(헤더 아래) 영역 xml. 반드시 menu디렉토리에 있을 것.-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id = "@+id/Mypage"
+        android:icon = "@drawable/ic_android_black_24dp"
+        android:title = "마이페이지"
+        />
+    <item android:id = "@+id/StudentList"
+        android:icon = "@drawable/ic_android_black_24dp"
+        android:title = "학생 수첩"
+        />
+    <item android:id = "@+id/TeacherList"
+        android:icon = "@drawable/ic_android_black_24dp"
+        android:title = "교사 수첩"
+        />
+    <item android:id = "@+id/LogOut"
+        android:icon = "@drawable/ic_android_black_24dp"
+        android:title = "로그아웃"
+        />
+
+</menu>

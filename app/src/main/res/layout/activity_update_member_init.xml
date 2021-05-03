@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_MemberInit"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:gravity="center"
+        android:text="회원정보"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="100dp">
+
+        <ImageButton
+            android:id="@+id/ProfilePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:enabled="false"
+            android:src="@drawable/ic_android_black_24dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/NameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="이름"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/GroupEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="직책"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/EmailEditText_MemUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="이메일"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/PhoneEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="휴대폰 번호"
+            android:inputType="phone"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/BirthEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="생년월일 : ex) 20021010"
+            android:inputType="date"
+            android:textColor="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/PostalAddressEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="주소"
+            android:inputType="textPostalAddress"
+            android:textColor="@color/colorBlack"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/ModifyBttn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수정하기" />
+
+        <Button
+            android:id="@+id/UpdateBttn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="완료" />
+
+    </LinearLayout>
+
+</LinearLayout>

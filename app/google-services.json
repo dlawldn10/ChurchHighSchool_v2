@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "506871908203",
+    "project_id": "sns-project-deeb5",
+    "storage_bucket": "sns-project-deeb5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506871908203:android:35975d7d14fa7f61c56e2e",
+        "android_client_info": {
+          "package_name": "com.project.churchschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506871908203-7civkk1a36gjrocga3nonn3t2a5jl8n3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvJ87s_u4_BWee5pyCiCgUW7iFFgBVfyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506871908203-7civkk1a36gjrocga3nonn3t2a5jl8n3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/my_prayerlist" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline" />
+
+        <EditText
+            android:id="@+id/Memo_multiLineTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:outlineProvider="none"
+            android:singleLine="false"
+            android:text="공유하고 싶은 기도제목이 있나요? \n자유롭게 작성해 봅시다:)"
+            android:textAlignment="center" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="20dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp">
+
+                <EditText
+                    android:id="@+id/Prayer_text_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start|top"
+                    android:hint="내용을 입력하세요"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp" />
+            </ScrollView>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/Prayer_Save_Bttn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="저장하기"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.App">
+
+    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/Prayer_delete_Bttn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="삭제"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.App"
+        android:visibility="gone">
+
+    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+
+</RelativeLayout>
