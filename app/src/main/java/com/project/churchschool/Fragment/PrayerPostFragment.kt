@@ -35,6 +35,7 @@ class PrayerPostFragment : Fragment() {
                 prayer.text = text
                 prayer.date = (activity as BasicActivity).getYYYYMMDD()
                 myRef.push().setValue(prayer) //푸시를 해야 데이터가 묶음으로 들어감
+
             }
             (activity as BasicActivity).setView(5)
         }
