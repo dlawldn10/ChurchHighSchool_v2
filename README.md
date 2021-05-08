@@ -30,7 +30,7 @@
 ---
 ## 이번주 들은 설교 내용 메모, 휴대폰에 저장
 #### SQLite를 이용한 메모 저장
-### <img src = "https://user-images.githubusercontent.com/69448918/115144032-61647480-a085-11eb-804e-eae8d64b52ab.jpg" width="300px"> <img src = "https://user-images.githubusercontent.com/69448918/115144033-61fd0b00-a085-11eb-9c01-f8ef480f5047.jpg" width="300px">
+### <img src = "https://user-images.githubusercontent.com/69448918/117546280-9c464080-b064-11eb-8b3e-77f9f71baa81.jpg" width="300px"> <img src = "https://user-images.githubusercontent.com/69448918/117546283-9d776d80-b064-11eb-918b-fde3c985d77b.jpg" width="300px">
 ---
 ## 각자의 기도제목을 쓰고 함께 기도하기
 ### 익명 게시판으로 설정하여 부담없이 기도제목 게시 가능
