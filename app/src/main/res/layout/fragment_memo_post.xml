@@ -110,6 +110,7 @@
                     android:id="@+id/Memo_Inside_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
                     android:gravity="start|top"
                     android:hint="내용을 입력하세요"
                     android:importantForAutofill="no"

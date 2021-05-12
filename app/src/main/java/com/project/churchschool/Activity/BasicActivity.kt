@@ -2,10 +2,8 @@ package com.project.churchschool.Activity
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -18,7 +16,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.Source
@@ -37,8 +34,6 @@ import kotlinx.android.synthetic.main.main_drawer_header.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -279,7 +274,6 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     }
 
-
     fun setDrawer(headerView : View){
         currentUser.get().addOnSuccessListener { documentSnapshot ->
             currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)
@@ -289,6 +283,16 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
+    fun updateDrawer(headerView : View){
+        currentUser.get().addOnSuccessListener { documentSnapshot ->
+            currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)
+            headerView.drawer_Name.setText(currentUserInfo?.name + " " + currentUserInfo?.group)
+            headerView.drawer_email.setText(currentUserInfo?.email)
+            Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500).into(headerView.header_icon)
+        }
+    }
+
+
 
     //회원가입 및 회원정보 업데이트 시 호출
     fun setMemberInfo(memberInfo : MemberInfo, activityName: String){
@@ -296,45 +300,23 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         val currentUser = db.collection("users").document(memberInfo.email.toString())
         currentUser.set(memberInfo).addOnSuccessListener {
 
-            Log.e("결과", "db등록 성공")
+//            Log.e("결과", "db등록 성공")
             if(activityName.equals("MyPageActivity")){
                 Toast.makeText(
                     baseContext, "업데이트가 완료되었습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
+
             }
             if(activityName.equals("SignUpActivity")){
                 Toast.makeText(
-                    baseContext, "2222",
+                    baseContext, "회원가입이 완료되었습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }   //db에 회원 등록.
     }
 
-    //출석정보 리스트로 저장
-    fun saveAttndnceData(name : String, Attndnce : Boolean){
-        this.StudentsAttndnceData?.put(name, Attndnce)
-
-    }
-
-    //출석정보 업데이트 시 호출
-    fun addAttndnceInfo(db : FirebaseFirestore, currentUserInfo : MemberInfo, FinalattndnceData : AttndnceData){
-
-        db.collection("attendances")
-            .document(currentUserInfo.name.toString())
-            .update("attndnceDataList", FieldValue.arrayUnion(FinalattndnceData))
-            .addOnSuccessListener {
-
-                Log.e("결과", "db등록 성공")
-                Toast.makeText(
-                    baseContext, "출석정보가 업데이트 되었습니다.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                setView(2)
-        }   //db에 회원 등록.
-
-    }
 
     fun convertTime(): Date {
         val now : Long = System.currentTimeMillis() //현재시간 가져오기
@@ -365,16 +347,7 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         cal.time = Date()
         val df: DateFormat = SimpleDateFormat("yyyy-MM-dd")
 
-//        val dateFormat = SimpleDateFormat("YYYY/MM/DD")
-//        val getYYYYMMDD_Date : String = dateFormat.format(convertTime())
         return df.format(cal.time)
-
-    }
-
-    fun getYYYMM() : String{
-        val dateFormat = SimpleDateFormat("YYYY/MM/")
-        val getYYYYMM_Date : String = dateFormat.format(convertTime())
-        return getYYYYMM_Date
 
     }
 
@@ -402,11 +375,6 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     fun gotoMypageActivity(activity : Activity){
         val intent = Intent(activity, MyPageActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun gotoGalleryActivity(activity : Activity){
-        val intent = Intent(activity, GalleryActivity::class.java)
         startActivity(intent)
     }
 

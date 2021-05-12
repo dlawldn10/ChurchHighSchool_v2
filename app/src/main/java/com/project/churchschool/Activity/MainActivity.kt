@@ -1,6 +1,7 @@
 package com.project.churchschool.Activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -16,6 +17,8 @@ import kotlinx.android.synthetic.main.main_drawer_header.view.*
 class MainActivity : BasicActivity() {
 
     var backKeyPressedTime: Long = 0
+    var navigationView : NavigationView? = null
+    var headerView : View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +27,14 @@ class MainActivity : BasicActivity() {
         setBottomNavBar()
         setView(1)
 
-        val navigationView  = findViewById<NavigationView>(R.id.main_navigationView)
-        val headerView = navigationView.getHeaderView(0)
+        navigationView = findViewById<NavigationView>(R.id.main_navigationView)
+        headerView = navigationView!!.getHeaderView(0)
+        setDrawer(headerView!!)
+    }
 
-        setDrawer(headerView)
-
+    override fun onResume() {
+        super.onResume()
+        updateDrawer(headerView!!)
     }
 
 

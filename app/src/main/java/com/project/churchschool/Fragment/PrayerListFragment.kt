@@ -22,7 +22,7 @@ class PrayerListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    
+
     val database = Firebase.database
     var myRef = database.getReference("prayers").orderByKey()
 
@@ -30,6 +30,8 @@ class PrayerListFragment : Fragment() {
     var contents = arrayListOf<PrayerData?>()
     var contents_get = arrayListOf<PrayerData?>()
     var oldPrayer_get = arrayListOf<String?>()
+
+    var contentsLimit = 15
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +44,7 @@ class PrayerListFragment : Fragment() {
                 (activity as BasicActivity).setView(8)
             }
 
-        myRef.limitToLast(5).addListenerForSingleValueEvent(object : ValueEventListener {
+        myRef.limitToLast(contentsLimit).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (item in dataSnapshot.children) {
                     contents.add(0, item.getValue<PrayerData>())
@@ -63,7 +65,7 @@ class PrayerListFragment : Fragment() {
                             //스크롤 하단 체크
                             if (!canScrollVertically(1)) {
 
-                                myRef.endAt(oldestPrayerKey).limitToLast(5)
+                                myRef.endAt(oldestPrayerKey).limitToLast(contentsLimit)
                                     .addListenerForSingleValueEvent(object : ValueEventListener {
                                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                                             contents_get.clear() //임시저장 위치

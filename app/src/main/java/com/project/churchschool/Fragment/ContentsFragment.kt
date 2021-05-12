@@ -3,6 +3,7 @@ package com.project.churchschool.Fragment
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,28 +19,28 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.storage.FirebaseStorage
 import com.project.churchschool.Activity.BasicActivity
-import com.project.churchschool.Activity.GalleryActivity
+import com.project.churchschool.Activity.ProgressDialog
 import com.project.churchschool.DataClass.MemberInfo
 import com.project.churchschool.R
-import kotlinx.android.synthetic.main.activity_my_page.*
 import kotlinx.android.synthetic.main.fragment_contents.*
 import kotlinx.android.synthetic.main.fragment_contents.view.*
-import kotlinx.android.synthetic.main.fragment_myclass_attendance.view.*
-import java.io.File
-import java.io.FileInputStream
 
 
 class ContentsFragment : Fragment() {
+    var PICK_IMAGE_FROM_ALBUM = 100
     private val db = FirebaseFirestore.getInstance()
-    private var contentUri: String = ""
+    private var contentUri: Uri? = null
     private val externalStorageRQ : Int = 1
     private val storage : FirebaseStorage = FirebaseStorage.getInstance()
+
+    var customProgressDialog: ProgressDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         var rootView = inflater.inflate(R.layout.fragment_contents, container, false)
+        customProgressDialog = ProgressDialog(context)
 
         val settings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
@@ -55,7 +56,6 @@ class ContentsFragment : Fragment() {
         }
 
         downloadContent()   //원래 있던 주보 다운로드
-        
 
         rootView.findViewById<Button>(R.id.content_modify_bttn).setOnClickListener {
             when {
@@ -81,10 +81,9 @@ class ContentsFragment : Fragment() {
     }
 
     fun gotoGallery(){
-        val intent = Intent(context, GalleryActivity::class.java)
-        //startActivityForResult는 A에서 이동한 B Activity가 종료되면서 다시 A로 데이터를 보내는 방식.
-        intent.putExtra("from", "ContentsFragment")
-        startActivityForResult(intent, 200)
+        var photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.type = "image/*"
+        startActivityForResult(photoPickerIntent,PICK_IMAGE_FROM_ALBUM)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
@@ -112,29 +111,22 @@ class ContentsFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == AppCompatActivity.RESULT_OK) {
             when (requestCode) {
-//                100 -> {
-//                    val result = data?.getStringExtra("PROFILE_PHOTO_PATH")
-//                    profilePhotoUri = result
-//                    Glide.with(this).load(result).override(500).into(ProfilePhoto)
-//                }
-                200 -> {
-                    val result = data?.getStringExtra("CONTENT_PATH")
-                    contentUri = result!!
-                    Glide.with(this).load(result).override(500).into(contentView_imageView)
-                    updateOnDB(contentUri)
+                    PICK_IMAGE_FROM_ALBUM -> {
+                        contentUri = data?.data
+                        Glide.with(this).load(contentUri).override(500).into(contentView_imageView)
+                        updateOnDB(contentUri)
                 }
             }
         }
     }
 
-    fun updateOnDB(uri : String) {
+    fun updateOnDB(uri : Uri?) {
 
-        val stream = FileInputStream(File(uri))
         val storageRef = storage.reference
         val profileImageRef = storageRef.child("contents/thisWeek.jpg")
 
-        val uploadTask = profileImageRef.putStream(stream)
-
+        val uploadTask = profileImageRef.putFile(uri!!)
+        customProgressDialog?.show()
         uploadTask.continueWithTask { task ->
             if (!task.isSuccessful) {
                 task.exception?.let {
@@ -145,6 +137,7 @@ class ContentsFragment : Fragment() {
             profileImageRef.downloadUrl
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                customProgressDialog?.dismiss()
                 Toast.makeText(
                     context, "주보가 업데이트 되었습니다",
                     Toast.LENGTH_SHORT
@@ -163,9 +156,10 @@ class ContentsFragment : Fragment() {
     fun downloadContent() {
         val storageRef = storage.reference
         val contentImageRef = storageRef.child("contents/thisWeek.jpg")
+        customProgressDialog?.show()
         contentImageRef.downloadUrl.addOnSuccessListener {
             Glide.with(this).load(it).override(500).into(contentView_imageView)
-
+            customProgressDialog?.dismiss()
         }.addOnFailureListener {
             Toast.makeText(
                 context, "주보 업데이트가 필요합니다.",
