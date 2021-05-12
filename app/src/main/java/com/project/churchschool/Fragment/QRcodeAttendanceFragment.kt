@@ -57,7 +57,6 @@ class QRcodeAttendanceFragment : Fragment() {
         val thisYear = (activity as BasicActivity).getYear()
         var thisMonth_int: Int? = (activity as BasicActivity).getMonth().toInt()
         var thisMonth_string : String = (activity as BasicActivity).getMonth()
-        var today : String = (activity as BasicActivity).getDate()
 
 
         val thisMonthDataRef = db.collection("attendances").document(thisYear).collection(thisMonth_string)
@@ -65,42 +64,48 @@ class QRcodeAttendanceFragment : Fragment() {
         setUI(rootView, thisMonth_int)
 
         currentUser.get().addOnSuccessListener { documentSnapshot ->
-            currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
+            //잘 붙어있을때
+            if(getActivity() != null && isAdded()) {    //이 부분을 해줘야 Fragment not attached 오류가 나지 않는다.
+                // -> 이유 : 비동기 네트워크 사용 시, 서버에서 정보 가져왔는데 fragment나 activity가 없는경우 오류발생
 
-            rootView.findViewById<TextView>(R.id.Teaher_MyName).text = currentUserInfo.name + " " + currentUserInfo.group
-            rootView.findViewById<TextView>(R.id.Year_TextView).text = thisYear + "년"
-            rootView.findViewById<TextView>(R.id.Month_TextView).text = thisMonth_string + "월"
+                currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
 
-            Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500)
-                .into(profilePhoto)
+                rootView.findViewById<TextView>(R.id.Teaher_MyName).text = currentUserInfo.name + " " + currentUserInfo.group
+                rootView.findViewById<TextView>(R.id.Year_TextView).text = thisYear + "년"
+                rootView.findViewById<TextView>(R.id.Month_TextView).text = thisMonth_string + "월"
 
-            db.collection("attendances").document(thisYear).collection(thisMonth_string)
-                .get().addOnSuccessListener { result ->
+                Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500)
+                    .into(profilePhoto)
 
-                    var dateList : ArrayList<String> = arrayListOf()
-                    for (document in result) {
-                        attndnceInfo.add(document.data)
-                        Log.d(TAG, "${document.id} => ${document.data}")
-                        dateList.add(document.id)
-                        Log.d(TAG, "$dateList")
+                db.collection("attendances").document(thisYear).collection(thisMonth_string)
+                    .get().addOnSuccessListener { result ->
+
+                        var dateList : ArrayList<String> = arrayListOf()
+                        for (document in result) {
+                            attndnceInfo.add(document.data)
+                            Log.d(TAG, "${document.id} => ${document.data}")
+                            dateList.add(document.id)
+                            Log.d(TAG, "$dateList")
+                        }
+                        for(i in 0..dateList.size-1){
+                            FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i], dateList[i]))
+                        }
+                        viewManager = LinearLayoutManager(context)
+                        viewAdapter = QRAttndnceAdapter(FinalattndnceInfo, activity, this)
+
+
+                        recyclerView =
+                            rootView.findViewById<RecyclerView>(R.id.Teaher_myclass_Attndnce)
+                                .apply {
+                                    setHasFixedSize(true)
+                                    layoutManager = viewManager
+                                    adapter = viewAdapter
+                                    //뷰메니저와 어댑터 적용하기.
+                                }
+
                     }
-                    for(i in 0..dateList.size-1){
-                        FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i], dateList[i]))
-                    }
-                    viewManager = LinearLayoutManager(context)
-                    viewAdapter = QRAttndnceAdapter(FinalattndnceInfo, activity, this)
 
-
-                    recyclerView =
-                        rootView.findViewById<RecyclerView>(R.id.Teaher_myclass_Attndnce)
-                            .apply {
-                                setHasFixedSize(true)
-                                layoutManager = viewManager
-                                adapter = viewAdapter
-                                //뷰메니저와 어댑터 적용하기.
-                            }
-
-                }
+            }
         }
 
         rootView.Tchr_Attndnce_right_arrow.setOnClickListener {     //다음월 데이터 출력하기
@@ -116,40 +121,45 @@ class QRcodeAttendanceFragment : Fragment() {
 
 
             currentUser.get(Source.CACHE).addOnSuccessListener { documentSnapshot ->
-                currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
-                rootView.findViewById<TextView>(R.id.Teaher_MyName).text = currentUserInfo.name + " " + currentUserInfo.group
-                rootView.findViewById<TextView>(R.id.Year_TextView).text = thisYear + "년"
-                rootView.findViewById<TextView>(R.id.Month_TextView).text = thisMonth_string + "월"
-                Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500)
-                    .into(profilePhoto)
+                if(getActivity() != null && isAdded()) {
+                    currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
+                    rootView.findViewById<TextView>(R.id.Teaher_MyName).text =
+                        currentUserInfo.name + " " + currentUserInfo.group
+                    rootView.findViewById<TextView>(R.id.Year_TextView).text = thisYear + "년"
+                    rootView.findViewById<TextView>(R.id.Month_TextView).text =
+                        thisMonth_string + "월"
+                    Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500)
+                        .into(profilePhoto)
 
 
-                db.collection("attendances").document(thisYear).collection(thisMonth_string)
-                    .get().addOnSuccessListener { result ->
-                        var dateList : ArrayList<String> = arrayListOf()
-                        for (document in result) {
-                            attndnceInfo.add(document.data)
-                            Log.d(TAG, "${document.id} => ${document.data}")
-                            dateList.add(document.id)
-                            Log.d(TAG, "$dateList")
+                    db.collection("attendances").document(thisYear).collection(thisMonth_string)
+                        .get().addOnSuccessListener { result ->
+                            var dateList: ArrayList<String> = arrayListOf()
+                            for (document in result) {
+                                attndnceInfo.add(document.data)
+                                Log.d(TAG, "${document.id} => ${document.data}")
+                                dateList.add(document.id)
+                                Log.d(TAG, "$dateList")
+                            }
+                            for (i in 0..dateList.size - 1) {
+                                FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i],
+                                    dateList[i]))
+                            }
+                            viewManager = LinearLayoutManager(requireContext())
+                            viewAdapter = QRAttndnceAdapter(FinalattndnceInfo, activity, this)
+
+
+                            recyclerView =
+                                rootView.findViewById<RecyclerView>(R.id.Teaher_myclass_Attndnce)
+                                    .apply {
+                                        setHasFixedSize(true)
+                                        layoutManager = viewManager
+                                        adapter = viewAdapter
+                                        //뷰메니저와 어댑터 적용하기.
+                                    }
+
                         }
-                        for(i in 0..dateList.size-1){
-                            FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i], dateList[i]))
-                        }
-                        viewManager = LinearLayoutManager(requireContext())
-                        viewAdapter = QRAttndnceAdapter(FinalattndnceInfo, activity, this)
-
-
-                        recyclerView =
-                            rootView.findViewById<RecyclerView>(R.id.Teaher_myclass_Attndnce)
-                                .apply {
-                                    setHasFixedSize(true)
-                                    layoutManager = viewManager
-                                    adapter = viewAdapter
-                                    //뷰메니저와 어댑터 적용하기.
-                                }
-
-                    }
+                }
             }
         }
 
@@ -165,39 +175,44 @@ class QRcodeAttendanceFragment : Fragment() {
             setUI(rootView, thisMonth_int)
 
             currentUser.get(Source.CACHE).addOnSuccessListener { documentSnapshot ->
-                currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
-                rootView.findViewById<TextView>(R.id.Teaher_MyName).text = currentUserInfo.name + " " + currentUserInfo.group
-                rootView.findViewById<TextView>(R.id.Year_TextView).text = thisYear + "년"
-                rootView.findViewById<TextView>(R.id.Month_TextView).text = thisMonth_string + "월"
-                Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500)
-                    .into(profilePhoto)
+                if(getActivity() != null && isAdded()) {
+                    currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
+                    rootView.findViewById<TextView>(R.id.Teaher_MyName).text =
+                        currentUserInfo.name + " " + currentUserInfo.group
+                    rootView.findViewById<TextView>(R.id.Year_TextView).text = thisYear + "년"
+                    rootView.findViewById<TextView>(R.id.Month_TextView).text =
+                        thisMonth_string + "월"
+                    Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500)
+                        .into(profilePhoto)
 
-                db.collection("attendances").document(thisYear).collection(thisMonth_string)
-                    .get().addOnSuccessListener { result ->
-                        var dateList : ArrayList<String> = arrayListOf()
-                        for (document in result) {
-                            attndnceInfo.add(document.data)
-                            Log.d(TAG, "${document.id} => ${document.data}")
-                            dateList.add(document.id)
-                            Log.d(TAG, "$dateList")
+                    db.collection("attendances").document(thisYear).collection(thisMonth_string)
+                        .get().addOnSuccessListener { result ->
+                            var dateList: ArrayList<String> = arrayListOf()
+                            for (document in result) {
+                                attndnceInfo.add(document.data)
+                                Log.d(TAG, "${document.id} => ${document.data}")
+                                dateList.add(document.id)
+                                Log.d(TAG, "$dateList")
+                            }
+                            for (i in 0..dateList.size - 1) {
+                                FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i],
+                                    dateList[i]))
+                            }
+                            viewManager = LinearLayoutManager(requireContext())
+                            viewAdapter = QRAttndnceAdapter(FinalattndnceInfo, activity, this)
+
+
+                            recyclerView =
+                                rootView.findViewById<RecyclerView>(R.id.Teaher_myclass_Attndnce)
+                                    .apply {
+                                        setHasFixedSize(true)
+                                        layoutManager = viewManager
+                                        adapter = viewAdapter
+                                        //뷰메니저와 어댑터 적용하기.
+                                    }
+
                         }
-                        for(i in 0..dateList.size-1){
-                            FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i], dateList[i]))
-                        }
-                        viewManager = LinearLayoutManager(requireContext())
-                        viewAdapter = QRAttndnceAdapter(FinalattndnceInfo, activity, this)
-
-
-                        recyclerView =
-                            rootView.findViewById<RecyclerView>(R.id.Teaher_myclass_Attndnce)
-                                .apply {
-                                    setHasFixedSize(true)
-                                    layoutManager = viewManager
-                                    adapter = viewAdapter
-                                    //뷰메니저와 어댑터 적용하기.
-                                }
-
-                    }
+                }
             }
         }
 
@@ -223,5 +238,6 @@ class QRcodeAttendanceFragment : Fragment() {
             rootView.Tchr_Attndnce_left_arrow.visibility = View.VISIBLE
         }
     }
+
 
 }

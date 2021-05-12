@@ -53,8 +53,6 @@ class AttendanceCloserLookFragment : Fragment() {
         val Save_Bttn = rootView.findViewById<ImageView>(R.id.Attndnce_save_imageView)
         val Update_Bttn = rootView.findViewById<ImageView>(R.id.Attndnce_update_imageView)
         val Cancel_Bttn = rootView.findViewById<ImageView>(R.id.Attendnce_cancel_imageView)
-        val Modify_Bttn = rootView.findViewById<ImageView>(R.id.modifyAttndnce_imageView)
-        val Delete_Bttn = rootView.findViewById<ImageView>(R.id.deleteAttndnce_imageView)
         val Screen = rootView.findViewById<ImageView>(R.id.Screen)
         val profilePhoto = rootView.AttndnceChk_profileImage
         val selectedData : QR_AttendanceData? = (activity as BasicActivity).getSelectedAttendnceDataList()
@@ -65,16 +63,12 @@ class AttendanceCloserLookFragment : Fragment() {
         }
 
         if(selectedData != null) {  //클릭해서 들어온 경우UI
-            Modify_Bttn.visibility = View.VISIBLE
-            Delete_Bttn.visibility = View.VISIBLE
             Save_Bttn.visibility = View.GONE
             Update_Bttn.visibility = View.GONE
             Cancel_Bttn.visibility = View.GONE
             }
         else{
             //기본UI
-            Modify_Bttn.visibility = View.GONE
-            Delete_Bttn.visibility = View.GONE
             Update_Bttn.visibility = View.GONE
             Save_Bttn.visibility = View.VISIBLE
             Cancel_Bttn.visibility = View.VISIBLE
@@ -82,77 +76,6 @@ class AttendanceCloserLookFragment : Fragment() {
 
         //데이터 로드
         loadData(rootView, selectedData, false)
-
-        //수정 후 저장(업데이트) 버튼 클릭
-        //지난 데이터 수정
-//        Update_Bttn.setOnClickListener {
-//            //새로운 데이터 추가하고
-//            currentUser.get(Source.CACHE).addOnSuccessListener { documentSnapshot ->
-//                val currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
-//                val TodayAttndnceData = AttndnceData(
-//                    (activity as BasicActivity).StudentsAttndnceData,
-//                    selectedData?.date)
-//
-//                (activity as BasicActivity).addAttndnceInfo(db, currentUserInfo, TodayAttndnceData)
-//            }
-//
-//            //원래있던거 삭제
-//            currentUser.get(Source.CACHE).addOnSuccessListener { documentSnapshot ->
-//                val currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
-//                db.collection("attendances")
-//                    .document(currentUserInfo.name.toString())
-//                    .update("attndnceDataList", FieldValue.arrayRemove(selectedData))
-//                    .addOnSuccessListener {
-//
-//                    }
-//            }
-//
-//        }
-//
-//        //저장버튼 클릭
-//        //이번주 출석체크 저장
-//        Save_Bttn.setOnClickListener {
-//            //추가하기
-//            currentUser.get().addOnSuccessListener { documentSnapshot ->
-//                val currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
-//                val TodayAttndnceData = AttndnceData(
-//                    (activity as BasicActivity).StudentsAttndnceData,
-//                    (activity as BasicActivity).getYYYYMMDD())
-//
-//                (activity as BasicActivity).addAttndnceInfo(db, currentUserInfo, TodayAttndnceData)
-//            }
-//
-//        }
-//
-//        //수정하기 누르면
-//        Modify_Bttn.setOnClickListener {
-//            Modify_Bttn.visibility = View.GONE
-//            Delete_Bttn.visibility = View.VISIBLE
-//            Save_Bttn.visibility = View.GONE
-//            Update_Bttn.visibility = View.VISIBLE
-//            Cancel_Bttn.visibility = View.VISIBLE
-//            Screen.visibility = View.GONE
-//
-//
-//            //새로고침.
-//            loadData(rootView, selectedData, true)
-//        }
-//
-//        //삭제버튼 클릭
-//        Delete_Bttn.setOnClickListener {
-//            if(selectedData != null) {
-//                //원래있던거 삭제
-//                currentUser.get(Source.CACHE).addOnSuccessListener { documentSnapshot ->
-//                    val currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
-//                    makeAlert_delete("출석정보", currentUserInfo, selectedData)
-//                }
-//            }
-//
-//        }
-//
-//        Cancel_Bttn.setOnClickListener {
-//            makeAlert_calncel("출석정보")
-//        }
 
 
         return rootView

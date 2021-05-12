@@ -69,22 +69,6 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/modifyAttndnce_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_baseline_edit_24" />
-
-            <ImageView
-                android:id="@+id/deleteAttndnce_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_baseline_delete_24" />
-
         </LinearLayout>
 
         <FrameLayout

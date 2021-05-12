@@ -155,7 +155,7 @@ class MemoPostFragment : Fragment() {
         return rootView
     }
 
-    private fun makeAlert(what : String, how : String){   //왜 화면전환 안되는지 확인하기
+    private fun makeAlert(what : String, how : String){
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(what + how)
         builder.setMessage("이 $what" + "를 $how" + "하시겠습니까?")

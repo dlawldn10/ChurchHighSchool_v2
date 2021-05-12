@@ -56,7 +56,7 @@ class QRcodeScannerActivity : BasicActivity() {
                 var presentUser = db.collection("users").document(result.contents).get()
                 presentUser.addOnSuccessListener{ documentSnapshot ->
                     val presentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
-                    val data = hashMapOf(presentUserInfo.name to true)
+                    val data = hashMapOf(presentUserInfo.name + " " + presentUserInfo.group to true)
                     db.collection("attendances").document(getYear()).collection(getMonth()).document(getYYYYMMDD())
                         .set(data, SetOptions.merge())
                 }

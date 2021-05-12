@@ -1,6 +1,7 @@
 package com.project.churchschool.Activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -58,8 +59,9 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             .build()
         db.firestoreSettings = settings     //오프라인일때 캐시 사용하여 로드하기 설정.
 
-
     }
+
+
 
     fun getUser() : FirebaseUser? {
         return user

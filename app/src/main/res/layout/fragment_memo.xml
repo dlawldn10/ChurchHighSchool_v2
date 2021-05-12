@@ -96,7 +96,10 @@
             android:layout_alignParentBottom="true"
             android:backgroundTint="@color/mainBlue"
             android:clickable="true"
+            android:foregroundTint="#FFFFFF"
             android:src="@drawable/ic_baseline_add_24"
+            android:tint="@color/colorWhite"
+            app:backgroundTint="@color/mainBlue"
             app:useCompatPadding="true" />
     </RelativeLayout>
 </LinearLayout>

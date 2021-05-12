@@ -40,11 +40,13 @@
             android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textMultiLine"
             android:outlineProvider="none"
             android:singleLine="false"
             android:text="공유하고 싶은 기도제목이 있나요? \n자유롭게 작성해 봅시다:)"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -56,12 +58,14 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#FFFFFF"
                 android:padding="15dp">
 
                 <EditText
                     android:id="@+id/Prayer_text_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:backgroundTint="#00FFFFFF"
                     android:gravity="start|top"
                     android:hint="내용을 입력하세요"
                     android:importantForAutofill="no"

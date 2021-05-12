@@ -56,19 +56,22 @@
 
             <EditText
                 android:id="@+id/Memo_multiLineTextView"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:background="@android:color/transparent"
+                android:clickable="false"
                 android:ems="10"
+                android:enabled="false"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:outlineProvider="none"
                 android:singleLine="false"
                 android:text="하나님께서 어떤 말씀을 해주셨나요? \n오늘의 말씀을 기록해 봅시다:)"
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
                 android:textSize="14sp" />
 
             <ImageView

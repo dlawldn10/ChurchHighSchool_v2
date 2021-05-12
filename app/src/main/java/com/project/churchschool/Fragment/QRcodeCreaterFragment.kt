@@ -34,18 +34,21 @@ class QRcodeCreaterFragment : Fragment() {
         var currentUserInfo : MemberInfo
         val currentUser = db.collection("users").document(user?.email.toString())
         currentUser.get().addOnSuccessListener { documentSnapshot ->
-            currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
+            if(getActivity() != null && isAdded()) {
+                currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
 
-            iv = rootView.findViewById<ImageView>(com.project.churchschool.R.id.qrcode_imageView)
-            text = currentUserInfo.email
-            val multiFormatWriter = MultiFormatWriter()
-            try {
-                val bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, 200, 200)
-                val barcodeEncoder = BarcodeEncoder()
-                val bitmap = barcodeEncoder.createBitmap(bitMatrix)
-                iv!!.setImageBitmap(bitmap)
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                iv =
+                    rootView.findViewById<ImageView>(com.project.churchschool.R.id.qrcode_imageView)
+                text = currentUserInfo.email
+                val multiFormatWriter = MultiFormatWriter()
+                try {
+                    val bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, 200, 200)
+                    val barcodeEncoder = BarcodeEncoder()
+                    val bitmap = barcodeEncoder.createBitmap(bitMatrix)
+                    iv!!.setImageBitmap(bitmap)
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                }
             }
 
         }
