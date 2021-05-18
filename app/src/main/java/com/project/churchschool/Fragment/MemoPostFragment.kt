@@ -107,7 +107,7 @@ class MemoPostFragment : Fragment() {
             val values = ContentValues()
             values.put("title", title)
             values.put("text", text)
-            //메모를 월별로 확인하고 싶으므로 작성날짜는 업데이트 하지 않는다.
+            //설교를 듣고 작성한 날짜로 메모를 확인하고 싶으므로 작성날짜는 업데이트 하지 않는다.
 
             database.update("myMemo", values, "_id =?", arrayOf(this_primkey))
             Toast.makeText(requireContext(), "업데이트 되었습니다.", Toast.LENGTH_SHORT).show()
@@ -120,6 +120,8 @@ class MemoPostFragment : Fragment() {
 
             modifyBttn.visibility = View.VISIBLE
             deleteBttn.visibility = View.VISIBLE
+
+            (activity as BasicActivity).setView(4)
         }
 
         saveBttn.setOnClickListener {
@@ -144,6 +146,8 @@ class MemoPostFragment : Fragment() {
 
             modifyBttn.visibility = View.VISIBLE
             deleteBttn.visibility = View.VISIBLE
+
+            (activity as BasicActivity).setView(4)
 
         }
 

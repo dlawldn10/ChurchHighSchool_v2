@@ -39,6 +39,13 @@ class QRcodeAttendanceFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+
+//    override fun onResume() {
+//        super.onResume()
+//
+////        (activity as BasicActivity).setView(2)
+//        Toast.makeText(requireContext(), "onResume", Toast.LENGTH_SHORT).show()
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -238,6 +245,7 @@ class QRcodeAttendanceFragment : Fragment() {
             rootView.Tchr_Attndnce_left_arrow.visibility = View.VISIBLE
         }
     }
+
 
 
 }

@@ -67,7 +67,7 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="#00FFFFFF"
                     android:gravity="start|top"
-                    android:hint="내용을 입력하세요"
+                    android:hint="내용을 입력하세요\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
                     android:textAlignment="viewStart"

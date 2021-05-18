@@ -65,7 +65,6 @@ class MemoFragment : Fragment() {
             if(c !=null) {
 
                 while (c.moveToNext()) {
-
                     val memo = MemoData()
                     memo.primKey = c.getString(c.getColumnIndex("_id"))
                     memo.title = c.getString(c.getColumnIndex("title"))

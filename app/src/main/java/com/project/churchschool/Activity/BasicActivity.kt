@@ -1,7 +1,6 @@
 package com.project.churchschool.Activity
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -85,17 +84,14 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 fragmentTransaction.commit()
             }
             2->{
-//                val fragMyClassAttendance = MyclassAttendanceFragment()
-//                fragmentTransaction.replace(Container_frameLayout.id, fragMyClassAttendance)
-//                fragmentTransaction.commit()
+
                 if (currentUserInfo?.group == "학생") {
                     val fragCreateQR = QRcodeCreaterFragment()
                     fragmentTransaction.replace(Container_frameLayout.id, fragCreateQR)
                     fragmentTransaction.commit()
                 }else{
-//                    gotoQRscannerActivity(this)
-                    val fragScanQR = QRcodeAttendanceFragment()
-                    fragmentTransaction.replace(Container_frameLayout.id, fragScanQR)
+                    val fragAttendance = QRcodeAttendanceFragment()
+                    fragmentTransaction.replace(Container_frameLayout.id, fragAttendance)
                     fragmentTransaction.commit()
                 }
 

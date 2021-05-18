@@ -47,16 +47,16 @@ class QRcodeScannerActivity : BasicActivity() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+//                새로고침 어떻게 하지?
                 finish()
-                // todo
             } else {
                 startScan()
-                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 var presentUser = db.collection("users").document(result.contents).get()
                 presentUser.addOnSuccessListener{ documentSnapshot ->
                     val presentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
+                    val who = presentUserInfo.name + " " + presentUserInfo.group
                     val data = hashMapOf(presentUserInfo.name + " " + presentUserInfo.group to true)
+                    Toast.makeText(this, "출석: " + who, Toast.LENGTH_LONG).show()
                     db.collection("attendances").document(getYear()).collection(getMonth()).document(getYYYYMMDD())
                         .set(data, SetOptions.merge())
                 }
