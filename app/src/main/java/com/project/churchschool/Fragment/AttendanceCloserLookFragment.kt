@@ -50,9 +50,7 @@ class AttendanceCloserLookFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_attndnce_chck, container, false)
 
 //        (activity as BasicActivity).setSelectedAttendnceData(null)
-        val Save_Bttn = rootView.findViewById<ImageView>(R.id.Attndnce_save_imageView)
-        val Update_Bttn = rootView.findViewById<ImageView>(R.id.Attndnce_update_imageView)
-        val Cancel_Bttn = rootView.findViewById<ImageView>(R.id.Attendnce_cancel_imageView)
+
         val Screen = rootView.findViewById<ImageView>(R.id.Screen)
         val profilePhoto = rootView.AttndnceChk_profileImage
         val selectedData : QR_AttendanceData? = (activity as BasicActivity).getSelectedAttendnceDataList()
@@ -60,18 +58,6 @@ class AttendanceCloserLookFragment : Fragment() {
         currentUser.get(Source.CACHE).addOnSuccessListener { documentSnapshot ->
             val currentUserInfo = documentSnapshot.toObject(MemberInfo::class.java)!!
             Glide.with(this).load(currentUserInfo?.profilePhotoUrl).override(500).into(profilePhoto)
-        }
-
-        if(selectedData != null) {  //클릭해서 들어온 경우UI
-            Save_Bttn.visibility = View.GONE
-            Update_Bttn.visibility = View.GONE
-            Cancel_Bttn.visibility = View.GONE
-            }
-        else{
-            //기본UI
-            Update_Bttn.visibility = View.GONE
-            Save_Bttn.visibility = View.VISIBLE
-            Cancel_Bttn.visibility = View.VISIBLE
         }
 
         //데이터 로드

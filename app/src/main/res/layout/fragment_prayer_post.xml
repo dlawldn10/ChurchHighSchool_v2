@@ -55,25 +55,19 @@
             android:layout_marginTop="10dp"
             app:cardCornerRadius="20dp">
 
-            <ScrollView
+            <EditText
+                android:id="@+id/Prayer_text_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
-                android:padding="15dp">
-
-                <EditText
-                    android:id="@+id/Prayer_text_EditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="#00FFFFFF"
-                    android:gravity="start|top"
-                    android:hint="내용을 입력하세요\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-                    android:importantForAutofill="no"
-                    android:inputType="textMultiLine"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="14sp" />
-            </ScrollView>
+                android:layout_margin="20dp"
+                android:backgroundTint="#00FFFFFF"
+                android:gravity="start|top"
+                android:hint="내용을 입력하세요"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp" />
 
         </androidx.cardview.widget.CardView>
 

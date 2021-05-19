@@ -5,24 +5,12 @@ import android.content.ContentValues
 import android.content.DialogInterface
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.view.isVisible
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.project.churchschool.Activity.BasicActivity
-import com.project.churchschool.DataClass.AttndnceData
-import com.project.churchschool.DataClass.MemberInfo
-import com.project.churchschool.DataClass.MemoData
 import com.project.churchschool.DataClass.SQLiteHelper
 import com.project.churchschool.R
 import kotlinx.android.synthetic.main.fragment_memo_post.*
@@ -50,6 +38,7 @@ class MemoPostFragment : Fragment() {
 
         val titleEditText = rootView.findViewById<EditText>(R.id.Memo_Title_EditText)
         val insideEditText = rootView.findViewById<EditText>(R.id.Memo_Inside_EditText)
+
         val dbName = (activity as BasicActivity).get_myDBname()
 
         val YYYYMMDD = (activity as BasicActivity).getYYYYMMDD()
@@ -58,7 +47,6 @@ class MemoPostFragment : Fragment() {
         database = dbHelper.writableDatabase
 
         val selectedMemo = (activity as BasicActivity).getSelectedMemoData()
-
 
 
         if(selectedMemo != null){    //메모를 눌러서 들어온 경우.
