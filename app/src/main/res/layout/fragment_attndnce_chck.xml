@@ -125,7 +125,7 @@
         android:foregroundTint="#FFFFFF"
         android:src="@drawable/ic_baseline_add_24"
         android:tint="@color/colorWhite"
-        android:visibility="gone"
+        android:visibility="visible"
         app:backgroundTint="@color/mainBlue"
         app:useCompatPadding="true" />
 

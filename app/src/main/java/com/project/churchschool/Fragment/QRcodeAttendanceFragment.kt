@@ -90,9 +90,7 @@ class QRcodeAttendanceFragment : Fragment() {
                         var dateList : ArrayList<String> = arrayListOf()
                         for (document in result) {
                             attndnceInfo.add(document.data)
-                            Log.d(TAG, "${document.id} => ${document.data}")
                             dateList.add(document.id)
-                            Log.d(TAG, "$dateList")
                         }
                         for(i in 0..dateList.size-1){
                             FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i], dateList[i]))
@@ -144,9 +142,7 @@ class QRcodeAttendanceFragment : Fragment() {
                             var dateList: ArrayList<String> = arrayListOf()
                             for (document in result) {
                                 attndnceInfo.add(document.data)
-                                Log.d(TAG, "${document.id} => ${document.data}")
                                 dateList.add(document.id)
-                                Log.d(TAG, "$dateList")
                             }
                             for (i in 0..dateList.size - 1) {
                                 FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i],
@@ -197,9 +193,7 @@ class QRcodeAttendanceFragment : Fragment() {
                             var dateList: ArrayList<String> = arrayListOf()
                             for (document in result) {
                                 attndnceInfo.add(document.data)
-                                Log.d(TAG, "${document.id} => ${document.data}")
                                 dateList.add(document.id)
-                                Log.d(TAG, "$dateList")
                             }
                             for (i in 0..dateList.size - 1) {
                                 FinalattndnceInfo.add(QR_AttendanceData(attndnceInfo[i],

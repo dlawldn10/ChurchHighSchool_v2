@@ -16,9 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.Source
+import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
 import com.project.churchschool.DataClass.AttndnceData
 import com.project.churchschool.DataClass.MemberInfo
@@ -42,6 +40,7 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     var SelectedMemo : MemoData? = null
     var SelectedAttndnce : AttndnceData? = null
     var SelectedAttndnce_ : QR_AttendanceData? = null
+    var SelectedStudent : String = ""
     var myDBname = ""
 
     private val db = FirebaseFirestore.getInstance()
@@ -84,22 +83,18 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 fragmentTransaction.commit()
             }
             2->{
-
                 if (currentUserInfo?.group == "학생") {
                     val fragCreateQR = QRcodeCreaterFragment()
                     fragmentTransaction.replace(Container_frameLayout.id, fragCreateQR)
+                    fragmentTransaction.addToBackStack("attendance")
                     fragmentTransaction.commit()
                 }else{
                     val fragAttendance = QRcodeAttendanceFragment()
                     fragmentTransaction.replace(Container_frameLayout.id, fragAttendance)
+                    fragmentTransaction.addToBackStack("attendance")
                     fragmentTransaction.commit()
                 }
 
-
-//                val fragScanQR = QRcodeScannerFragment()
-//                fragmentTransaction.replace(Container_frameLayout.id, fragScanQR)
-//                fragmentTransaction.commit()
-//                gotoQRscannerActivity(this)
             }
             3->{
                 val fragContents = ContentsFragment()
@@ -117,10 +112,6 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 fragmentTransaction.commit()
             }
             6->{
-//                val TchrFragAttndnce = Teacher_AttndnceChckFragment()
-//                fragmentTransaction.replace(Container_frameLayout.id, TchrFragAttndnce)
-//                fragmentTransaction.commit()
-
                 gotoQRscannerActivity(this)
             }
             7->{
@@ -134,8 +125,15 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 fragmentTransaction.commit()
             }
             9->{
-                val TchrFragAttndnce = AttendanceCloserLookFragment()
-                fragmentTransaction.replace(Container_frameLayout.id, TchrFragAttndnce)
+                val fragAttendanceCloserLook = AttendanceCloserLookFragment()
+                fragmentTransaction.replace(Container_frameLayout.id, fragAttendanceCloserLook)
+                fragmentTransaction.addToBackStack("attendance")
+                fragmentTransaction.commit()
+            }
+            10->{
+                val fragStudentList = StudentListFragment()
+                fragmentTransaction.replace(Container_frameLayout.id, fragStudentList)
+                fragmentTransaction.addToBackStack("attendance")
                 fragmentTransaction.commit()
             }
         }
@@ -156,6 +154,32 @@ open class BasicActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     fun setSelectedAttendnceDataList(data : QR_AttendanceData){
         SelectedAttndnce_ = data
+    }
+
+    fun setSelectedStudentName(data : String){
+        SelectedStudent = data  //이제 이 데이터를 선택한 날짜의 출석데이터랑 합쳐서 서버에 저장해야함 //이 변수 잘보면 필요없음..
+        val year = SelectedAttndnce_!!.date?.slice(0..3)
+        val month = SelectedAttndnce_!!.date?.slice(5..6)
+        val date = SelectedAttndnce_!!.date
+        val newData = hashMapOf(data + " 학생" to true)
+        db.collection("attendances").document(year.toString()).collection(month.toString()).document(date.toString())
+            .set(newData, SetOptions.merge())
+    }
+
+    fun delete_SelectedStudentName(data : String){
+        SelectedStudent = data  //이제 이 데이터를 선택한 날짜의 출석데이터랑 합쳐서 서버에 저장해야함 //이 변수 잘보면 필요없음..
+        val year = SelectedAttndnce_!!.date?.slice(0..3)
+        val month = SelectedAttndnce_!!.date?.slice(5..6)
+        val date = SelectedAttndnce_!!.date
+        val updates = hashMapOf<String, Any>(
+            data to FieldValue.delete()
+        )
+
+        db.collection("attendances").document(year.toString()).collection(month.toString())
+            .document(date.toString()).update(updates).addOnCompleteListener {
+                Toast.makeText(this, "성공적으로 삭제되었습니다", Toast.LENGTH_SHORT).show()
+            }
+
     }
 
     fun getSelectedAttendnceData() : AttndnceData? {

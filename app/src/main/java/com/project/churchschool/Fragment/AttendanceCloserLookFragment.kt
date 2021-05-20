@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -63,37 +64,14 @@ class AttendanceCloserLookFragment : Fragment() {
         //데이터 로드
         loadData(rootView, selectedData, false)
 
+        rootView.findViewById<FloatingActionButton>(R.id.addStudent_Bttn).setOnClickListener {
+            (activity as BasicActivity).setView(10)
+        }
+
 
         return rootView
     }
 
-    private fun makeAlert_delete(what : String, currentUserInfo: MemberInfo, selectedData: AttndnceData?){   //왜 화면전환 안되는지 확인하기
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("$what 삭제")
-        builder.setMessage("이 $what" + "를 삭제 하시겠습니까?")
-        builder.setPositiveButton("예") { dialogInterface: DialogInterface, i: Int ->
-            deleteData(currentUserInfo, selectedData)
-
-        }
-        builder.setNegativeButton("아니오") { dialogInterface: DialogInterface, i: Int ->
-
-        }
-        builder.show()
-
-    }
-
-    fun makeAlert_calncel(what : String){
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("$what 취소")
-        builder.setMessage("이 $what" + "작성을 취소 하시겠습니까?")
-        builder.setPositiveButton("예") { dialogInterface: DialogInterface, i: Int ->
-            (activity as BasicActivity).setView(2)
-        }
-        builder.setNegativeButton("아니오") { dialogInterface: DialogInterface, i: Int ->
-
-        }
-        builder.show()
-    }
 
     fun deleteData(currentUserInfo : MemberInfo, selectedData : AttndnceData?){
         db.collection("attendances")
@@ -123,11 +101,7 @@ class AttendanceCloserLookFragment : Fragment() {
             }
             rootView.findViewById<TextView>(R.id.Teaher_MyName).text = currentUserInfo.name + " " + currentUserInfo.group
 
-//            for(i in 0..selectedData!!.attndnceData.size-1){
-//                studentList = selectedData.attndnceData[i]
-//            }
 
-//            Log.d(ContentValues.TAG, "$selectedData")
             viewManager = LinearLayoutManager(requireContext())
             if(selectedData != null){
                 viewAdapter = AttendanceCloserLookAdapter(studentList, activity, this, selectedData, isModifyMode)

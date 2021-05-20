@@ -23,8 +23,6 @@ class QRcodeScannerActivity : BasicActivity() {
     val db = FirebaseFirestore.getInstance()
     var auth: FirebaseAuth = Firebase.auth
 
-    var thisMonth_string : String = getMonth()
-
     private var qrScan: IntentIntegrator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
